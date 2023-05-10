@@ -6,24 +6,37 @@ export class TaskController {
   constructor(private repository: DatabaseRepository<Task>) {}
 
   async list(req: Request, res: Response, next: NextFunction): Promise<void> {
-    res.status(200).json({
-      message: "List task",
-    });
+    try {
+      const tasks = await this.repository.list();
+      res.status(200).json(tasks);
+    } catch (err) {
+      next(err);
+    }
   }
   async create(req: Request, res: Response, next: NextFunction): Promise<void> {
-    const body = req.body;
+    try {
+      const body = req.body;
 
-    // TODO: Error Handling
-    const task = await this.repository.create(body);
+      // TODO: Error Handling
+      const task = await this.repository.create(body);
 
-    console.log(`Body: `, body);
+      console.log(`Body: `, body);
 
-    res.status(200).json(task);
+      res.status(200).json(task);
+    } catch (err) {
+      next(err);
+    }
   }
   async get(req: Request, res: Response, next: NextFunction): Promise<void> {
-    res.status(200).json({
-      message: "Get task",
-    });
+    try {
+      const { taskId } = req.params;
+
+      const task = this.repository.get(taskId);
+
+      res.status(200).json(task);
+    } catch (err) {
+      next(err);
+    }
   }
   async update(req: Request, res: Response, next: NextFunction): Promise<void> {
     res.status(200).json({

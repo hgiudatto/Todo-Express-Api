@@ -11,5 +11,5 @@ export default new DataSource({
   database: "todo",
   entities: [Task],
   synchronize: true,
-  logging: false,
+  logging: ["query", "error"],
 });

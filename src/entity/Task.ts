@@ -4,12 +4,13 @@ import {
   ObjectIdColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ObjectID,
 } from "typeorm";
 
 @Entity()
 export class Task {
   @ObjectIdColumn()
-  id!: number;
+  id!: ObjectID;
 
   @Column()
   title!: string;

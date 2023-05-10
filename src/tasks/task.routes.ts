@@ -6,9 +6,9 @@ const router = Router();
 const controller = new TaskController(new TaskRepository());
 
 router.post("/tasks", controller.create.bind(controller));
-router.get("/tasks", controller.list);
-router.get("/tasks/:taskId", controller.get);
-router.put("/tasks/:taskId", controller.update);
-router.delete("/tasks/:taskId", controller.remove);
+router.get("/tasks", controller.list.bind(controller));
+router.get("/tasks/:taskId", controller.get.bind(controller));
+router.put("/tasks/:taskId", controller.update.bind(controller));
+router.delete("/tasks/:taskId", controller.remove.bind(controller));
 
 export default router;
